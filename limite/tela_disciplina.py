@@ -5,7 +5,8 @@ class TelaDisciplina:
         print("1 - Incluir Disciplina")
         print("2 - Excluir Disciplina")
         print("3 - Alterar Disciplina")
-        print("4 - Listar Disciplians")
+        print("4 - Listar todas Disciplians")
+        print("5 - Listar uma disciplina")
         print("0 - Retornar")
 
         opcao = int(input("Escolha a opção: "))
