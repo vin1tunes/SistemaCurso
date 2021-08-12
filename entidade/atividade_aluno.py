@@ -1,5 +1,6 @@
 from entidade.aluno import Aluno
 from entidade.atividade import Atividade
+from entidade.disciplina import Disciplina
 
 
 class AtividadeAluno:
@@ -8,11 +9,12 @@ class AtividadeAluno:
     atributos: nota, data_entrega, Aluno.
     """
 
-    def __init__(self, nota: int, data_entrega: int, atividade: Atividade, aluno: Aluno):
+    def __init__(self, nota: int, data_entrega: int, atividade: Atividade, aluno: Aluno, disciplina: Disciplina):
         self.__nota = nota
         self.__data_entrega = data_entrega
         self.__atividade = atividade
         self.__aluno = aluno
+        self.__disciplina = disciplina
 
     @property
     def nota(self):
@@ -37,3 +39,7 @@ class AtividadeAluno:
     @property
     def aluno(self):
         return self.__aluno
+
+    @property
+    def disciplina(self):
+        return self.__disciplina
