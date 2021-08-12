@@ -9,6 +9,7 @@ class TelaDisciplina:
         print("5 - Listar uma disciplina")
         print("6 - Buscar por um aluno em uma disciplina")
         print("7 - Excluir aluno de uma disciplina")
+        print("8 - Buscar uma disciplina")
         print("0 - Retornar")
 
         opcao = int(input("Escolha a opção: "))
@@ -62,6 +63,10 @@ class TelaDisciplina:
     def seleciona_titulo_atividade(self):
         titulo_atividade = input("Selecione o título da atividade que deseja incluir na disciplina: ")
         return titulo_atividade
+
+    def atividade_planejada(self):
+        qtd_atividade = input("Quantidade de atividades planejadas para essa disciplina: ")
+        return qtd_atividade
 
     def show_msg(self, msg):
         print(msg)
