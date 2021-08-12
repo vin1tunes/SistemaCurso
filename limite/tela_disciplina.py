@@ -7,6 +7,8 @@ class TelaDisciplina:
         print("3 - Alterar Disciplina")
         print("4 - Listar todas Disciplians")
         print("5 - Listar uma disciplina")
+        print("6 - Buscar por um aluno em uma disciplina")
+        print("7 - Excluir aluno de uma disciplina")
         print("0 - Retornar")
 
         opcao = int(input("Escolha a opção: "))
@@ -47,6 +49,14 @@ class TelaDisciplina:
 
     def seleciona_matricula_aluno(self):
         matricula_aluno = input("Selecione a matrícula do aluno que deseja incluir na disciplina: ")
+        return matricula_aluno
+
+    def find_student(self):
+        matricula_aluno = input("Selecione a matrícula do aluno que deseja procurar na disciplina: ")
+        return matricula_aluno
+
+    def matricula_excluir(self):
+        matricula_aluno = input("Seleciona a matrícula do aluno que deseja excluir da disciplina: ")
         return matricula_aluno
 
     def seleciona_titulo_atividade(self):
