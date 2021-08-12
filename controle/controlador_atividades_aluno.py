@@ -26,19 +26,19 @@ class ControladorAtividadesAluno:
         self.__tela_atividade_aluno.mostra_media(media)
 
     def incluir_atividade_aluno(self):
-        dados_atividade_aluno = self.__tela_atividade_aluno.pega_dados_atividade_aluno()
-
-        self.__controlar_sistema.controlador_atividades.lista_atividades()
-        titulo_atividade = self.__tela_atividade_aluno.seleciona_atividade_titulo()
-        atividade = self.__controlar_sistema.controlador_atividades.pega_atividade_por_titulo(titulo_atividade)
+        self.__controlar_sistema.controlador_disciplinas.lista_disciplina()
+        nome_disciplina = self.__tela_atividade_aluno.seleciona_nome_disciplina()
+        disciplina = self.__controlar_sistema.controlador_disciplinas.pega_disciplina_por_nome(nome_disciplina)
 
         self.__controlar_sistema.controlador_alunos.lista_alunos()
         matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
         aluno = self.__controlar_sistema.controlador_alunos.pega_aluno_por_matricula(matricula_aluno)
 
-        self.__controlar_sistema.controlador_disciplinas.lista_disciplina()
-        nome_disciplina = self.__tela_atividade_aluno.seleciona_nome_disciplina()
-        disciplina = self.__controlar_sistema.controlador_disciplinas.pega_disciplina_por_nome(nome_disciplina)
+        self.__controlar_sistema.controlador_atividades.lista_atividades()
+        titulo_atividade = self.__tela_atividade_aluno.seleciona_atividade_titulo()
+        atividade = self.__controlar_sistema.controlador_atividades.pega_atividade_por_titulo(titulo_atividade)
+
+        dados_atividade_aluno = self.__tela_atividade_aluno.pega_dados_atividade_aluno()
 
         atividade_aluno = AtividadeAluno(dados_atividade_aluno["nota"], dados_atividade_aluno["data_entrega"],
                                          atividade, aluno, disciplina)
@@ -91,6 +91,7 @@ class ControladorAtividadesAluno:
                                                                     "matricula_aluno": i.aluno.matricula,
                                                                     "nome_disciplina": i.disciplina.nome,
                                                                     "nome_professor": i.disciplina.professor.nome})
+                print("\n")
 
     def media_disciplina(self):
         matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
@@ -137,7 +138,7 @@ class ControladorAtividadesAluno:
         lista_opcoes = {1: self.incluir_atividade_aluno, 2: self.excluir_atividade_aluno,
                         3: self.alterar_atividade_aluno, 4: self.lista_atividade_aluno, 5: self.calcula_media,
                         6: self.lista_atividade_de_um_aluno, 7: self.lista_atividade_aluno_disciplina,
-                        0: self.retornar}
+                        8: self.media_disciplina, 0: self.retornar}
 
         while True:
             lista_opcoes[self.__tela_atividade_aluno.tela_opcoes()]()
