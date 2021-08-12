@@ -30,13 +30,16 @@ class ControladorDisciplinas:
             disciplina.inclui_aluno_disciplina(aluno)
             i += 1
 
-        self.__controlador_sistema.controlador_atividades.lista_atividades()
-        titulo_atividade = self.__tela_disciplina.seleciona_titulo_atividade()
-        atividade = self.__controlador_sistema.controlador_atividades.pega_atividade_por_titulo(titulo_atividade)
-        disciplina.inclui_atividade_disciplina(atividade)
+        j = 1
+        k = self.__tela_disciplina.atividade_planejada()
+        while j <= int(k):
+            self.__controlador_sistema.controlador_atividades.lista_atividades()
+            titulo_atividade = self.__tela_disciplina.seleciona_titulo_atividade()
+            atividade = self.__controlador_sistema.controlador_atividades.pega_atividade_por_titulo(titulo_atividade)
+            disciplina.inclui_atividade_disciplina(atividade)
+            j += 1
 
         # incluindo atividade na lista de atividades do aluno.
-        atividade_aluno = self.__controlador_sistema.controlador_atividades_aluno
 
     def lista_disciplina(self):
         for i in self.__disciplinas:
@@ -51,17 +54,18 @@ class ControladorDisciplinas:
         disciplina = self.pega_disciplina_por_nome(nome_disciplina)
 
         self.__tela_disciplina.mostra_disciplina({"nome": disciplina.nome, "qtd_max_alunos": disciplina.qtd_max_alunos,
-                                                      "nome_professor": disciplina.professor.nome,
-                                                      "cpf_professor": disciplina.professor.cpf,
-                                                      "departamento_professor": disciplina.professor.departamento})
+                                                  "nome_professor": disciplina.professor.nome,
+                                                  "cpf_professor": disciplina.professor.cpf,
+                                                  "departamento_professor": disciplina.professor.departamento})
+
         for j in disciplina.alunos:
-                self.__tela_disciplina.mostra_aluno_disciplina(
-                    {"nome": j.nome, "cpf": j.cpf, "matricula": j.matricula})
-                print('\n')
+            self.__tela_disciplina.mostra_aluno_disciplina({"nome": j.nome, "cpf": j.cpf,
+                                                            "matricula": j.matricula})
+            print('\n')
 
         for k in disciplina.atividades:
             self.__tela_disciplina.mostra_atividade_disciplina({"titulo": k.titulo, "descricao": k.descricao,
-                                                                    "prazo": k.prazo, "status": k.status})
+                                                                "prazo": k.prazo, "status": k.status})
 
     def alterar_disciplina(self):
         self.lista_disciplina()
@@ -86,6 +90,28 @@ class ControladorDisciplinas:
             self.lista_disciplina()
         else:
             self.__tela_disciplina.show_msg("Disciplina não existente.")
+
+    def find_subject(self):
+        nome_disciplina = self.__tela_disciplina.seleciona_disciplina()
+        disciplina = self.pega_disciplina_por_nome(nome_disciplina)
+
+        if disciplina is None:
+            self.__tela_disciplina.show_msg("Disciplina não encontrada.")
+        else:
+            self.__tela_disciplina.mostra_disciplina(
+                {"nome": disciplina.nome, "qtd_max_alunos": disciplina.qtd_max_alunos,
+                 "nome_professor": disciplina.professor.nome,
+                 "cpf_professor": disciplina.professor.cpf,
+                 "departamento_professor": disciplina.professor.departamento})
+
+            for j in disciplina.alunos:
+                self.__tela_disciplina.mostra_aluno_disciplina({"nome": j.nome, "cpf": j.cpf,
+                                                                "matricula": j.matricula})
+                print('\n')
+
+            for k in disciplina.atividades:
+                self.__tela_disciplina.mostra_atividade_disciplina({"titulo": k.titulo, "descricao": k.descricao,
+                                                                    "prazo": k.prazo, "status": k.status})
 
     def find_student_by_subject(self):
         self.lista_disciplina()
@@ -116,7 +142,7 @@ class ControladorDisciplinas:
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_disciplina, 2: self.excluir_disciplina, 3: self.alterar_disciplina,
                         4: self.lista_disciplina, 5: self.lista_disciplina_selecionada, 6: self.find_student_by_subject,
-                        7: self.excluir_aluno_disciplina, 0: self.retornar}
+                        7: self.excluir_aluno_disciplina, 8: self.find_subject, 0: self.retornar}
 
         while True:
             lista_opcoes[self.__tela_disciplina.tela_opcpes()]()
