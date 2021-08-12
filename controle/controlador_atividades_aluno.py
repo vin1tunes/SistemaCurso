@@ -36,8 +36,12 @@ class ControladorAtividadesAluno:
         matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
         aluno = self.__controlar_sistema.controlador_alunos.pega_aluno_por_matricula(matricula_aluno)
 
+        self.__controlar_sistema.controlador_disciplinas.lista_disciplina()
+        nome_disciplina = self.__tela_atividade_aluno.seleciona_nome_disciplina()
+        disciplina = self.__controlar_sistema.controlador_disciplinas.pega_disciplina_por_nome(nome_disciplina)
+
         atividade_aluno = AtividadeAluno(dados_atividade_aluno["nota"], dados_atividade_aluno["data_entrega"],
-                                         atividade, aluno)
+                                         atividade, aluno, disciplina)
         self.__atividades_aluno.append(atividade_aluno)
 
     def lista_atividade_aluno(self):
@@ -49,7 +53,9 @@ class ControladorAtividadesAluno:
                                                                 "status": i.atividade.status,
                                                                 "nome_aluno": i.aluno.nome,
                                                                 "cpf_aluno": i.aluno.cpf,
-                                                                "matricula_aluno": i.aluno.matricula})
+                                                                "matricula_aluno": i.aluno.matricula,
+                                                                "nome_disciplina": i.disciplina.nome,
+                                                                "nome_professor": i.disciplina.professor.nome})
             print("\n")
 
     def lista_atividade_de_um_aluno(self):
@@ -59,13 +65,46 @@ class ControladorAtividadesAluno:
         for i in self.__atividades_aluno:
             if i.aluno.matricula == matricula_aluno:
                 self.__tela_atividade_aluno.mostra_atividade_aluno({"nota": i.nota, "data_entrega": i.data_entrega,
-                                                                "titulo_atividade": i.atividade.titulo,
-                                                                "descricao_atividade": i.atividade.descricao,
-                                                                "prazo": i.atividade.prazo,
-                                                                "status": i.atividade.status,
-                                                                "nome_aluno": i.aluno.nome,
-                                                                "cpf_aluno": i.aluno.cpf,
-                                                                "matricula_aluno": i.aluno.matricula})
+                                                                    "titulo_atividade": i.atividade.titulo,
+                                                                    "descricao_atividade": i.atividade.descricao,
+                                                                    "prazo": i.atividade.prazo,
+                                                                    "status": i.atividade.status,
+                                                                    "nome_aluno": i.aluno.nome,
+                                                                    "cpf_aluno": i.aluno.cpf,
+                                                                    "matricula_aluno": i.aluno.matricula,
+                                                                    "nome_disciplina": i.disciplina.nome,
+                                                                    "nome_professor": i.disciplina.professor.nome})
+
+    def lista_atividade_aluno_disciplina(self):
+        matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
+        nome_disciplina = self.__tela_atividade_aluno.seleciona_nome_disciplina()
+
+        for i in self.__atividades_aluno:
+            if i.aluno.matricula == matricula_aluno and i.disciplina.nome == nome_disciplina:
+                self.__tela_atividade_aluno.mostra_atividade_aluno({"nota": i.nota, "data_entrega": i.data_entrega,
+                                                                    "titulo_atividade": i.atividade.titulo,
+                                                                    "descricao_atividade": i.atividade.descricao,
+                                                                    "prazo": i.atividade.prazo,
+                                                                    "status": i.atividade.status,
+                                                                    "nome_aluno": i.aluno.nome,
+                                                                    "cpf_aluno": i.aluno.cpf,
+                                                                    "matricula_aluno": i.aluno.matricula,
+                                                                    "nome_disciplina": i.disciplina.nome,
+                                                                    "nome_professor": i.disciplina.professor.nome})
+
+    def media_disciplina(self):
+        matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
+        nome_disciplina = self.__tela_atividade_aluno.seleciona_nome_disciplina()
+
+        soma_das_notas = 0
+        counter = 0
+
+        for i in self.__atividades_aluno:
+            if i.aluno.matricula == matricula_aluno and i.disciplina.nome == nome_disciplina:
+                soma_das_notas += int(i.nota)
+                counter += 1
+        media = soma_das_notas / counter
+        self.__tela_atividade_aluno.mostra_media(media)
 
     def alterar_atividade_aluno(self):
         self.lista_atividade_aluno()
@@ -97,7 +136,8 @@ class ControladorAtividadesAluno:
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_atividade_aluno, 2: self.excluir_atividade_aluno,
                         3: self.alterar_atividade_aluno, 4: self.lista_atividade_aluno, 5: self.calcula_media,
-                        6: self.lista_atividade_de_um_aluno, 0: self.retornar}
+                        6: self.lista_atividade_de_um_aluno, 7: self.lista_atividade_aluno_disciplina,
+                        0: self.retornar}
 
         while True:
             lista_opcoes[self.__tela_atividade_aluno.tela_opcoes()]()
