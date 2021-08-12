@@ -8,6 +8,7 @@ class TelaAtividadeAluno:
         print("4 - Listar todas atividades realizadas")
         print("5 - Calcula média atividades")
         print("6 - Listar todas atividades de um aluno")
+        print("7 - Listar todas atividades de um aluno em uma disciplina")
         print("0 - Retornar")
 
         opcao = int(input("Escolha a opção: "))
@@ -30,6 +31,8 @@ class TelaAtividadeAluno:
         print("Nome do aluno: ", dados_atividade_aluno["nome_aluno"])
         print("CPF do aluno: ", dados_atividade_aluno["cpf_aluno"])
         print("Matrícula do aluno: ", dados_atividade_aluno["matricula_aluno"])
+        print("Nome da disciplina: ", dados_atividade_aluno["nome_disciplina"])
+        print("Nome do professor: ", dados_atividade_aluno["nome_professor"])
 
     def seleciona_matricula_aluno(self):
         matricula_aluno = input("Seleciona a matrícula do aluno: ")
@@ -38,6 +41,10 @@ class TelaAtividadeAluno:
     def seleciona_atividade_titulo(self):
         titulo_atividade = input("Selecione o título da atividade que deseja incluir: ")
         return titulo_atividade
+
+    def seleciona_nome_disciplina(self):
+        nome_disciplina = input("Selecione o nome da disciplina: ")
+        return nome_disciplina
 
     def mostra_media(self, media):
         print(media)
