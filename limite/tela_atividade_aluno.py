@@ -9,6 +9,7 @@ class TelaAtividadeAluno:
         print("5 - Calcula média atividades")
         print("6 - Listar todas atividades de um aluno")
         print("7 - Listar todas atividades de um aluno em uma disciplina")
+        print("8 - Calcula a média de um aluno em uma disciplina")
         print("0 - Retornar")
 
         opcao = int(input("Escolha a opção: "))
