@@ -51,12 +51,20 @@ class ControladorAtividades:
         else:
             self.__tela_atividade.show_msg("Atividade não existente.")
 
+    def find_atividade_by_titulo(self):
+        titulo_atividade = self.__tela_atividade.seleciona_atividade()
+
+        for atividade in self.__atividades:
+            if atividade.titulo == titulo_atividade:
+                self.__tela_atividade.mostra_atividade({"titulo": atividade.titulo, "descricao": atividade.descricao,
+                                                        "prazo": atividade.prazo, "status": atividade.status})
+
     def retornar(self):
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
         lista_opcoes = {1: self.inclui_atividade, 2: self.alterar_atividade, 3: self.lista_atividades,
-                        4: self.excluir_atividade, 0: self.retornar}
+                        4: self.excluir_atividade, 5: self.find_atividade_by_titulo, 0: self.retornar}
 
         while True:
             lista_opcoes[self.__tela_atividade.tela_opcoes()]()

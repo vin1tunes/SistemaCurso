@@ -19,9 +19,10 @@ class TelaAtividade:
         print("2 - Alterar Atividade")
         print("3 - Listar Atividades")
         print("4 - Excluir Atividade")
+        print("5 - Buscar Atividade")
         print("0 - Retornar")
 
-        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 0])
+        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 5, 0])
         return opcao
 
     def pega_dados_atividade(self):

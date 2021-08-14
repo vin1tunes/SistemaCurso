@@ -121,6 +121,24 @@ class ControladorAtividadesAluno:
         else:
             self.__tela_atividade_aluno.show_msg("Atividade não encontrada.")
 
+    def find_atividade_aluno(self):
+        matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
+        titulo_atividade = self.__tela_atividade_aluno.seleciona_atividade_titulo()
+
+        for i in self.__atividades_aluno:
+            if i.atividade.titulo == titulo_atividade and i.aluno.matricula == matricula_aluno:
+                self.__tela_atividade_aluno.mostra_atividade_aluno({"nota": i.nota, "data_entrega": i.data_entrega,
+                                                                    "titulo_atividade": i.atividade.titulo,
+                                                                    "descricao_atividade": i.atividade.descricao,
+                                                                    "prazo": i.atividade.prazo,
+                                                                    "status": i.atividade.status,
+                                                                    "nome_aluno": i.aluno.nome,
+                                                                    "cpf_aluno": i.aluno.cpf,
+                                                                    "matricula_aluno": i.aluno.matricula,
+                                                                    "nome_disciplina": i.disciplina.nome,
+                                                                    "nome_professor": i.disciplina.professor.nome})
+                print("\n")
+
     def retornar(self):
         self.__controlar_sistema.abre_tela()
 
@@ -128,7 +146,7 @@ class ControladorAtividadesAluno:
         lista_opcoes = {1: self.incluir_atividade_aluno, 2: self.excluir_atividade_aluno,
                         3: self.alterar_atividade_aluno, 4: self.lista_atividade_aluno,
                         5: self.lista_atividade_de_um_aluno, 6: self.lista_atividade_aluno_disciplina,
-                        7: self.media_disciplina, 0: self.retornar},
+                        7: self.media_disciplina, 8: self.find_atividade_aluno, 0: self.retornar},
 
 
         while True:
