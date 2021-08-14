@@ -151,4 +151,3 @@ class ControladorAtividadesAluno:
 
         while True:
             lista_opcoes[self.__tela_atividade_aluno.tela_opcoes()]()
-#teste
