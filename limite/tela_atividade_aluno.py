@@ -1,22 +1,21 @@
 class TelaAtividadeAluno:
     def tela_opcoes(self):
-        print("-------- ATIVIDADE ALUNO -------")
+        print("******** ATIVIDADE ALUNO ********")
         print("Escolha a opção:")
-        print("1 - Incluir atividade")
-        print("2 - Excluir atividade")
-        print("3 - Alterar atividade")
+        print("1 - Incluir Atividade")
+        print("2 - Excluir Atividade")
+        print("3 - Alterar Atividade")
         print("4 - Listar todas atividades realizadas")
-        print("5 - Calcula média atividades")
-        print("6 - Listar todas atividades de um aluno")
-        print("7 - Listar todas atividades de um aluno em uma disciplina")
-        print("8 - Calcula a média de um aluno em uma disciplina")
+        print("5 - Listar todas atividades de um aluno")
+        print("6 - Listar todas atividades de um aluno em uma disciplina")
+        print("7 - Calcula a média de um aluno em uma disciplina")
         print("0 - Retornar")
 
         opcao = int(input("Escolha a opção: "))
         return opcao
 
     def pega_dados_atividade_aluno(self):
-        print("------- DADOS ATIVIDADE ALUNO --------")
+        print("******** DADOS ATIVIDADE ALUNO ********")
         nota = input("Nota: ")
         data_entrega = input("Data de entrega: ")
 

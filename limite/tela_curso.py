@@ -1,6 +1,6 @@
 class TelaCurso:
     def tela_opcoes(self):
-        print("-------- CURSO --------")
+        print("******** CURSO ********")
         print("1 - Incluir Curso")
         print("2 - Excluir Curso")
         print("3 - Alterar Curso")
@@ -11,7 +11,7 @@ class TelaCurso:
         return opcao
 
     def pega_dados_curso(self):
-        print("-------- DADOS CURSO --------")
+        print("******** DADOS CURSO ********")
         nome = input("Nome: ")
         instituicao = input("Instituição: ")
 

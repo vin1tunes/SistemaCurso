@@ -13,7 +13,7 @@ class TelaAtividade:
                     print("Números válidos: ", numeros_validos)
 
     def tela_opcoes(self):
-        print("-------- ATIVIDADES --------")
+        print("******** ATIVIDADES ********")
         print("Escolha a opção:")
         print("1 - Incluir Atividade")
         print("2 - Alterar Atividade")
@@ -25,7 +25,7 @@ class TelaAtividade:
         return opcao
 
     def pega_dados_atividade(self):
-        print("-------- DADOS ATIVIDADE --------")
+        print("******** DADOS ATIVIDADE ********")
         titulo = input("Título: ")
         descricao = input("Descrição: ")
         prazo = input("Prazo: ")

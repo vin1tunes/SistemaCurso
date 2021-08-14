@@ -22,5 +22,5 @@ class TelaSistema:
         print("5 - Atividades Aluno")
         print("0 - Encerra sistema")
 
-        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 0])
+        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 5, 0])
         return opcao

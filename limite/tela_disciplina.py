@@ -13,7 +13,7 @@ class TelaDisciplina:
                     print("Números válidos: ", numeros_validos)
 
     def tela_opcpes(self):
-        print("-------- DISCIPLINAS --------")
+        print("******** DISCIPLINAS ********")
         print("Escolha a opção:")
         print("1 - Incluir Disciplina")
         print("2 - Excluir Disciplina")
@@ -23,13 +23,14 @@ class TelaDisciplina:
         print("6 - Buscar por um aluno em uma disciplina")
         print("7 - Excluir aluno de uma disciplina")
         print("8 - Buscar uma disciplina")
+        print("9 - Listar Disciplinas de um aluno")
         print("0 - Retornar")
 
-        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 5, 6, 7, 8, 0])
+        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
         return opcao
 
     def pega_dados_disciplina(self):
-        print("-------- DADOS DISCIPLINA --------")
+        print("******** DADOS DISCIPLINA ********")
         nome = input("Nome: ")
         qtd_max_alunos = input("Número máximo de alunos: ")
 
@@ -62,7 +63,7 @@ class TelaDisciplina:
         return cpf_professor
 
     def seleciona_matricula_aluno(self):
-        matricula_aluno = input("Selecione a matrícula do aluno que deseja incluir na disciplina: ")
+        matricula_aluno = input("Selecione a matrícula do aluno: ")
         return matricula_aluno
 
     def find_student(self):
