@@ -14,17 +14,6 @@ class ControladorAtividadesAluno:
                 return atividade_aluno
         return None
 
-    def calcula_media(self):
-        matricula = self.__tela_atividade_aluno.seleciona_matricula_aluno()
-        soma_das_notas = 0
-        counter = 0
-        for atividade_aluno in self.__atividades_aluno:
-            if atividade_aluno.aluno.matricula == matricula:
-                soma_das_notas += int(atividade_aluno.nota)
-                counter += 1
-        media = soma_das_notas / counter
-        self.__tela_atividade_aluno.mostra_media(media)
-
     def incluir_atividade_aluno(self):
         self.__controlar_sistema.controlador_disciplinas.lista_disciplina()
         nome_disciplina = self.__tela_atividade_aluno.seleciona_nome_disciplina()
@@ -74,6 +63,7 @@ class ControladorAtividadesAluno:
                                                                     "matricula_aluno": i.aluno.matricula,
                                                                     "nome_disciplina": i.disciplina.nome,
                                                                     "nome_professor": i.disciplina.professor.nome})
+                print("\n")
 
     def lista_atividade_aluno_disciplina(self):
         matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
@@ -136,9 +126,10 @@ class ControladorAtividadesAluno:
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_atividade_aluno, 2: self.excluir_atividade_aluno,
-                        3: self.alterar_atividade_aluno, 4: self.lista_atividade_aluno, 5: self.calcula_media,
-                        6: self.lista_atividade_de_um_aluno, 7: self.lista_atividade_aluno_disciplina,
-                        8: self.media_disciplina, 0: self.retornar}
+                        3: self.alterar_atividade_aluno, 4: self.lista_atividade_aluno,
+                        5: self.lista_atividade_de_um_aluno, 6: self.lista_atividade_aluno_disciplina,
+                        7: self.media_disciplina, 0: self.retornar},
+
 
         while True:
             lista_opcoes[self.__tela_atividade_aluno.tela_opcoes()]()

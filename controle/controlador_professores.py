@@ -49,19 +49,21 @@ class ControladorProfessores:
         else:
             self.__tela_professor.show_msg("Professor não existente.")
 
+    def find_professor(self):
+        cpf_professor = self.__tela_professor.seleciona_professor()
+
+        for i in self.__professores:
+            if i.cpf == cpf_professor:
+                self.__tela_professor.mostra_professor({"nome": i.nome, "cpf": i.cpf, "departamento": i.departamento})
+            else:
+                self.__tela_professor.show_msg("Professor não encontrado.")
+
     def retornar(self):
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_professor, 2: self.alterar_professor, 3: self.lista_professores,
-                        4: self.excluir_professor, 0: self.retornar}
+                        4: self.excluir_professor, 5: self.find_professor, 0: self.retornar}
 
         while True:
             lista_opcoes[self.__tela_professor.tela_opcoes()]()
-
-
-
-
-
-
-

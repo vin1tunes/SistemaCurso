@@ -39,8 +39,6 @@ class ControladorDisciplinas:
             disciplina.inclui_atividade_disciplina(atividade)
             j += 1
 
-        # incluindo atividade na lista de atividades do aluno.
-
     def lista_disciplina(self):
         for i in self.__disciplinas:
             self.__tela_disciplina.mostra_disciplina({"nome": i.nome, "qtd_max_alunos": i.qtd_max_alunos,

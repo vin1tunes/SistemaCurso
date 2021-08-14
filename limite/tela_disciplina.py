@@ -23,10 +23,9 @@ class TelaDisciplina:
         print("6 - Buscar por um aluno em uma disciplina")
         print("7 - Excluir aluno de uma disciplina")
         print("8 - Buscar uma disciplina")
-        print("9 - Listar Disciplinas de um aluno")
         print("0 - Retornar")
 
-        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
+        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 5, 6, 7, 8, 0])
         return opcao
 
     def pega_dados_disciplina(self):
