@@ -53,11 +53,13 @@ class ControladorAtividades:
 
     def find_atividade_by_titulo(self):
         titulo_atividade = self.__tela_atividade.seleciona_atividade()
+        atividade = self.pega_atividade_por_titulo(titulo_atividade)
 
-        for atividade in self.__atividades:
-            if atividade.titulo == titulo_atividade:
-                self.__tela_atividade.mostra_atividade({"titulo": atividade.titulo, "descricao": atividade.descricao,
-                                                        "prazo": atividade.prazo, "status": atividade.status})
+        if atividade is not None:
+            self.__tela_atividade.mostra_atividade({"titulo": atividade.titulo, "descricao": atividade.descricao,
+                                                    "prazo": atividade.prazo, "status": atividade.status})
+        else:
+            self.__tela_atividade.show_msg("Atividade não encontrada.")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()

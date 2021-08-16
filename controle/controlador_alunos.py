@@ -48,21 +48,21 @@ class ControladorAlunos:
         else:
             self.__tela_aluno.show_msg("Aluno não existente.")
 
-    def find_student(self):
+    def find_student_by_matricula(self):
         matricula_aluno = self.__tela_aluno.seleciona_aluno()
+        aluno = self.pega_aluno_por_matricula(matricula_aluno)
 
-        for i in self.__alunos:
-            if i.matricula == matricula_aluno:
-                self.__tela_aluno.mostra_aluno({"nome": i.nome, "cpf": i.cpf, "matricula": i.matricula})
-            else:
-                self.__tela_aluno.show_msg("Aluno não encontrado.")
+        if aluno is not None:
+            self.__tela_aluno.mostra_aluno({"nome": aluno.nome, "cpf": aluno.cpf, "matricula": aluno.matricula})
+        else:
+            self.__tela_aluno.show_msg("Aluno não encontrado.")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_aluno, 2: self.alterar_aluno, 3: self.lista_alunos, 4: self.excluir_aluno,
-                        5: self.find_student, 0: self.retornar}
+                        5: self.find_student_by_matricula, 0: self.retornar}
 
         while True:
             lista_opcoes[self.__tela_aluno.tela_opcoes()]()

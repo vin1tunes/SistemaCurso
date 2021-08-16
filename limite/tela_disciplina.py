@@ -31,7 +31,7 @@ class TelaDisciplina:
     def pega_dados_disciplina(self):
         print("******** DADOS DISCIPLINA ********")
         nome = input("Nome: ")
-        qtd_max_alunos = input("Número máximo de alunos: ")
+        qtd_max_alunos = int(input("Número máximo de alunos: "))
 
         return {"nome": nome, "qtd_max_alunos": qtd_max_alunos}
 

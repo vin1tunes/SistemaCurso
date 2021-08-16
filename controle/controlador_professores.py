@@ -51,12 +51,13 @@ class ControladorProfessores:
 
     def find_professor(self):
         cpf_professor = self.__tela_professor.seleciona_professor()
+        professor = self.pega_professor_por_cpf(cpf_professor)
 
-        for i in self.__professores:
-            if i.cpf == cpf_professor:
-                self.__tela_professor.mostra_professor({"nome": i.nome, "cpf": i.cpf, "departamento": i.departamento})
-            else:
-                self.__tela_professor.show_msg("Professor não encontrado.")
+        if professor is not None:
+            self.__tela_professor.mostra_professor({"nome": professor.nome, "cpf": professor.cpf,
+                                                    "departamento": professor.departamento})
+        else:
+            self.__tela_professor.show_msg("Professor não encontrado.")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()

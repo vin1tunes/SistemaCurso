@@ -146,8 +146,7 @@ class ControladorAtividadesAluno:
         lista_opcoes = {1: self.incluir_atividade_aluno, 2: self.excluir_atividade_aluno,
                         3: self.alterar_atividade_aluno, 4: self.lista_atividade_aluno,
                         5: self.lista_atividade_de_um_aluno, 6: self.lista_atividade_aluno_disciplina,
-                        7: self.media_disciplina, 8: self.find_atividade_aluno, 0: self.retornar},
-
+                        7: self.media_disciplina, 8: self.find_atividade_aluno, 0: self.retornar}
 
         while True:
             lista_opcoes[self.__tela_atividade_aluno.tela_opcoes()]()

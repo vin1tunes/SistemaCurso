@@ -28,8 +28,8 @@ class TelaAluno:
     def pega_dados_aluno(self):
         print("******** DADOS ALUNO ********")
         nome = input("Nome: ")
-        cpf = int(input("CPF: "))
-        matricula = int(input("Matrícula: "))
+        cpf = input("CPF: ")
+        matricula = input("Matrícula: ")
 
         return {"nome": nome, "cpf": cpf, "matricula": matricula}
 
@@ -40,7 +40,7 @@ class TelaAluno:
         print("\n")
 
     def seleciona_aluno(self):
-        matricula = int(input("Matrícula do aluno que deseja selecionar: "))
+        matricula = input("Matrícula do aluno que deseja selecionar: ")
         return matricula
 
     def show_msg(self, msg):
