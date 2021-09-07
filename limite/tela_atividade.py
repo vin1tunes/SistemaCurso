@@ -1,49 +1,96 @@
+import PySimpleGUI as sg
+
+
 class TelaAtividade:
-    def validacao_opcao(self, msg: str = "", numeros_validos: [] = None):
-        while True:
-            opcao_lida = input(msg)
-            try:
-                numero = int(opcao_lida)
-                if numeros_validos and numero not in numeros_validos:
-                    raise ValueError
-                return numero
-            except ValueError:
-                print("Número incorreto.")
-                if numeros_validos:
-                    print("Números válidos: ", numeros_validos)
+    def __init__(self):
+        self.__window = None
+        self.init_opcoes()
 
     def tela_opcoes(self):
-        print("******** ATIVIDADES ********")
-        print("Escolha a opção:")
-        print("1 - Incluir Atividade")
-        print("2 - Alterar Atividade")
-        print("3 - Listar Atividades")
-        print("4 - Excluir Atividade")
-        print("5 - Buscar Atividade")
-        print("0 - Retornar")
-
-        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 5, 0])
+        self.init_opcoes()
+        button, values = self.open()
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
+        if values['4']:
+            opcao = 4
+        if values['5']:
+            opcao = 5
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
+        self.close()
         return opcao
 
-    def pega_dados_atividade(self):
-        print("******** DADOS ATIVIDADE ********")
-        titulo = input("Título: ")
-        descricao = input("Descrição: ")
-        prazo = input("Prazo: ")
-        status = input("Status: ")
+    def init_opcoes(self):
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text('******** ATIVIDADES *******', font=("Helvica", 25))],
+            [sg.Text('Escolha sua opção:', font=("Helvica", 15))],
+            [sg.Radio('Incluir Atividade', "RD1", key='1')],
+            [sg.Radio('Alterar Atividade', "RD1", key='2')],
+            [sg.Radio('Listar Atividade', "RD1", key='3')],
+            [sg.Radio('Excluir Atividade', "RD1", key='4')],
+            [sg.Radio('Buscar Atividade', "RD1", key='5')],
+            [sg.Radio('Retornar', "RD1", key='0')],
+            [sg.Button('Confirmar'), sg.Cancel("Cancelar")]
+        ]
+        self.__window = sg.Window('Sistema Curso').Layout(layout)
 
+    def pega_dados_atividade(self):
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text("******** DADOS ATIVIDADE ********", font=("Helvica", 25))],
+            [sg.Text("Título:", size=(15, 1)), sg.InputText('', key='titulo')],
+            [sg.Text("Descrição:", size=(15, 1)), sg.InputText('', key='descricao')],
+            [sg.Text("Prazo:", size=(15, 1)), sg.InputText('', key='prazo')],
+            [sg.Text("Status:", size=(15, 1)), sg.InputText('', key='status')],
+            [sg.Button("Confirmar"), sg.Cancel("Cancelar")]
+        ]
+        self.__window = sg.Window('Sistema Curso').Layout(layout)
+
+        button, values = self.open()
+        titulo = values['titulo']
+        descricao = values['descricao']
+        prazo = values['prazo']
+        status = values['status']
+
+        self.close()
         return {"titulo": titulo, "descricao": descricao, "prazo": prazo, "status": status}
 
     def mostra_atividade(self, dados_atividade):
-        print("Título da atividade: ", dados_atividade["titulo"])
-        print("Descrição da atividade: ", dados_atividade["descricao"])
-        print("Prazo da atividade: ", dados_atividade["prazo"])
-        print("Status da atividade: ", dados_atividade["status"])
-        print("\n")
+        string_todos_atividades = ''
+        for dado in dados_atividade:
+            string_todos_atividades = string_todos_atividades + "Título da atividade: " + dado["titulo"] + '\n'
+            string_todos_atividades = string_todos_atividades + "Descrição da atividade: " + str(dado["descricao"]) + '\n'
+            string_todos_atividades = string_todos_atividades + "Prazo da atividade: " + str(dado["prazo"]) + '\n'
+            string_todos_atividades = string_todos_atividades + "Status da atividade: " + str(dado["status"]) + '\n\n'
+
+            sg.Popup('******** LISTA DE ATIVIDADES DO CURSO ********', string_todos_atividades)
 
     def seleciona_atividade(self):
-        titulo_atividade = input("Título da atividade que deseja selecionar: ")
-        return titulo_atividade
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text("******** SELECIONAR ATIVIDADE ********", font=("Helvica", 25))],
+            [sg.Text("Digite o título da atividade que deseja selecionar:", font=("Helvica", 25))],
+            [sg.Text("Título:", size=(15, 1)), sg.InputText('', key='titulo')],
+            [sg.Button("Confirmar"), sg.Cancel("Cancelar")]
+        ]
+        self.__window = sg.Window('Seleciona Atividade').Layout(layout)
+
+        button, values = self.open()
+        titulo = values['titulo']
+        self.close()
+        return titulo
 
     def show_msg(self, msg):
-        print(msg)
+        sg.popup("", msg)
+
+    def close(self):
+        self.__window.Close()
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values

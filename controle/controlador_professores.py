@@ -20,9 +20,11 @@ class ControladorProfessores:
         self.__professores.append(professor)
 
     def lista_professores(self):
+        dados_professores = []
         for professor in self.__professores:
-            self.__tela_professor.mostra_professor({"nome": professor.nome, "cpf": professor.cpf,
-                                                    "departamento": professor.departamento})
+            dados_professores.append({"nome": professor.nome, "cpf": professor.cpf, "departamento": professor.departamento})
+
+        self.__tela_professor.mostra_professor(dados_professores)
 
     def alterar_professor(self):
         self.lista_professores()
@@ -50,12 +52,13 @@ class ControladorProfessores:
             self.__tela_professor.show_msg("Professor não existente.")
 
     def find_professor(self):
+        dado_professor = []
         cpf_professor = self.__tela_professor.seleciona_professor()
         professor = self.pega_professor_por_cpf(cpf_professor)
 
         if professor is not None:
-            self.__tela_professor.mostra_professor({"nome": professor.nome, "cpf": professor.cpf,
-                                                    "departamento": professor.departamento})
+            dado_professor.append({"nome": professor.nome, "cpf": professor.cpf, "departamento": professor.departamento})
+            self.__tela_professor.mostra_professor(dado_professor)
         else:
             self.__tela_professor.show_msg("Professor não encontrado.")
 

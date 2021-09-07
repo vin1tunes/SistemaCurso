@@ -1,26 +1,42 @@
+import PySimpleGUI as sg
+
+
 class TelaSistema:
-    def validacao_opcao(self, msg: str = "", numeros_validos: [] = None):
-        while True:
-            opcao_lida = input(msg)
-            try:
-                numero = int(opcao_lida)
-                if numeros_validos and numero not in numeros_validos:
-                    raise ValueError
-                return numero
-            except ValueError:
-                print("Número incorreto.")
-                if numeros_validos:
-                    print("Números válidos: ", numeros_validos)
+    def __init__(self):
+        self.__window = None
+        self.init_components()
 
     def tela_opcoes(self):
-        print("******** BEM-VINDO AO CURSO DE SISTEMAS DE INFORMAÇÃO ********")
-        print("Selecione o que deseja acessar: ")
-        print("1 - Alunos")
-        print("2 - Professores")
-        print("3 - Disciplinas")
-        print("4 - Atividades")
-        print("5 - Atividades Aluno")
-        print("0 - Encerra sistema")
-
-        opcao = self.validacao_opcao("Escolha uma opção: ", [1, 2, 3, 4, 5, 0])
+        self.init_components()
+        button, values = self.__window.Read()
+        opcao = 0
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
+        if values['4']:
+            opcao = 4
+        if values['5']:
+            opcao = 5
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
         return opcao
+
+    def close(self):
+        self.__window.Close()
+
+    def init_components(self):
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text("******* BEM-VINDO AO CURSO DE SISTEMAS DE INFORMAÇÃO ********", font=("Helvica", 25))],
+            [sg.Text("Escolha sua opção:", font=("Helvica", 15))],
+            [sg.Radio('Alunos', "RD1", key='1')],
+            [sg.Radio('Professores', "RD1", key='2')],
+            [sg.Radio('Disciplinas', "RD1", key='3')],
+            [sg.Radio('Atividades', "RD1", key='4')],
+            [sg.Radio('Atividades Aluno', "RD1", key='5')],
+            [sg.Radio('Finalizar Sistema', "RD1", key='0')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]

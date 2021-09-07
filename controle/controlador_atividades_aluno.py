@@ -34,54 +34,60 @@ class ControladorAtividadesAluno:
         self.__atividades_aluno.append(atividade_aluno)
 
     def lista_atividade_aluno(self):
+        dados_atividades = []
         for i in self.__atividades_aluno:
-            self.__tela_atividade_aluno.mostra_atividade_aluno({"nota": i.nota, "data_entrega": i.data_entrega,
-                                                                "titulo_atividade": i.atividade.titulo,
-                                                                "descricao_atividade": i.atividade.descricao,
-                                                                "prazo": i.atividade.prazo,
-                                                                "status": i.atividade.status,
-                                                                "nome_aluno": i.aluno.nome,
-                                                                "cpf_aluno": i.aluno.cpf,
-                                                                "matricula_aluno": i.aluno.matricula,
-                                                                "nome_disciplina": i.disciplina.nome,
-                                                                "nome_professor": i.disciplina.professor.nome})
-            print("\n")
+            dados_atividades.append({"nota": i.nota, "data_entrega": i.data_entrega,
+                                    "titulo_atividade": i.atividade.titulo,
+                                    "descricao_atividade": i.atividade.descricao,
+                                    "prazo": i.atividade.prazo,
+                                    "status": i.atividade.status,
+                                    "nome_aluno": i.aluno.nome,
+                                    "cpf_aluno": i.aluno.cpf,
+                                    "matricula_aluno": i.aluno.matricula,
+                                    "nome_disciplina": i.disciplina.nome,
+                                    "nome_professor": i.disciplina.professor.nome})
+
+        self.__tela_atividade_aluno.mostra_atividade_aluno(dados_atividades)
 
     def lista_atividade_de_um_aluno(self):
         self.__controlar_sistema.controlador_alunos.lista_alunos()
         matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
+        dados_atividades = []
 
         for i in self.__atividades_aluno:
             if i.aluno.matricula == matricula_aluno:
-                self.__tela_atividade_aluno.mostra_atividade_aluno({"nota": i.nota, "data_entrega": i.data_entrega,
-                                                                    "titulo_atividade": i.atividade.titulo,
-                                                                    "descricao_atividade": i.atividade.descricao,
-                                                                    "prazo": i.atividade.prazo,
-                                                                    "status": i.atividade.status,
-                                                                    "nome_aluno": i.aluno.nome,
-                                                                    "cpf_aluno": i.aluno.cpf,
-                                                                    "matricula_aluno": i.aluno.matricula,
-                                                                    "nome_disciplina": i.disciplina.nome,
-                                                                    "nome_professor": i.disciplina.professor.nome})
-                print("\n")
+                dados_atividades.append({"nota": i.nota, "data_entrega": i.data_entrega,
+                                        "titulo_atividade": i.atividade.titulo,
+                                        "descricao_atividade": i.atividade.descricao,
+                                        "prazo": i.atividade.prazo,
+                                        "status": i.atividade.status,
+                                        "nome_aluno": i.aluno.nome,
+                                        "cpf_aluno": i.aluno.cpf,
+                                        "matricula_aluno": i.aluno.matricula,
+                                        "nome_disciplina": i.disciplina.nome,
+                                        "nome_professor": i.disciplina.professor.nome})
+
+        self.__tela_atividade_aluno.mostra_atividade_aluno(dados_atividades)
 
     def lista_atividade_aluno_disciplina(self):
         matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
         nome_disciplina = self.__tela_atividade_aluno.seleciona_nome_disciplina()
+        dados_atividades = []
 
         for i in self.__atividades_aluno:
             if i.aluno.matricula == matricula_aluno and i.disciplina.nome == nome_disciplina:
-                self.__tela_atividade_aluno.mostra_atividade_aluno({"nota": i.nota, "data_entrega": i.data_entrega,
-                                                                    "titulo_atividade": i.atividade.titulo,
-                                                                    "descricao_atividade": i.atividade.descricao,
-                                                                    "prazo": i.atividade.prazo,
-                                                                    "status": i.atividade.status,
-                                                                    "nome_aluno": i.aluno.nome,
-                                                                    "cpf_aluno": i.aluno.cpf,
-                                                                    "matricula_aluno": i.aluno.matricula,
-                                                                    "nome_disciplina": i.disciplina.nome,
-                                                                    "nome_professor": i.disciplina.professor.nome})
-                print("\n")
+                dados_atividades.append({"nota": i.nota, "data_entrega": i.data_entrega,
+                                        "titulo_atividade": i.atividade.titulo,
+                                        "descricao_atividade": i.atividade.descricao,
+                                        "prazo": i.atividade.prazo,
+                                        "status": i.atividade.status,
+                                        "nome_aluno": i.aluno.nome,
+                                        "cpf_aluno": i.aluno.cpf,
+                                        "matricula_aluno": i.aluno.matricula,
+                                        "nome_disciplina": i.disciplina.nome,
+                                        "nome_professor": i.disciplina.professor.nome})
+
+        self.__tela_atividade_aluno.mostra_atividade_aluno(dados_atividades)
 
     def media_disciplina(self):
         matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
@@ -124,20 +130,22 @@ class ControladorAtividadesAluno:
     def find_atividade_aluno(self):
         matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
         titulo_atividade = self.__tela_atividade_aluno.seleciona_atividade_titulo()
+        dados_atividade = []
 
         for i in self.__atividades_aluno:
             if i.atividade.titulo == titulo_atividade and i.aluno.matricula == matricula_aluno:
-                self.__tela_atividade_aluno.mostra_atividade_aluno({"nota": i.nota, "data_entrega": i.data_entrega,
-                                                                    "titulo_atividade": i.atividade.titulo,
-                                                                    "descricao_atividade": i.atividade.descricao,
-                                                                    "prazo": i.atividade.prazo,
-                                                                    "status": i.atividade.status,
-                                                                    "nome_aluno": i.aluno.nome,
-                                                                    "cpf_aluno": i.aluno.cpf,
-                                                                    "matricula_aluno": i.aluno.matricula,
-                                                                    "nome_disciplina": i.disciplina.nome,
-                                                                    "nome_professor": i.disciplina.professor.nome})
-                print("\n")
+                dados_atividade.append({"nota": i.nota, "data_entrega": i.data_entrega,
+                                        "titulo_atividade": i.atividade.titulo,
+                                        "descricao_atividade": i.atividade.descricao,
+                                        "prazo": i.atividade.prazo,
+                                        "status": i.atividade.status,
+                                        "nome_aluno": i.aluno.nome,
+                                        "cpf_aluno": i.aluno.cpf,
+                                        "matricula_aluno": i.aluno.matricula,
+                                        "nome_disciplina": i.disciplina.nome,
+                                        "nome_professor": i.disciplina.professor.nome})
+
+        self.__tela_atividade_aluno.mostra_atividade_aluno(dados_atividade)
 
     def retornar(self):
         self.__controlar_sistema.abre_tela()

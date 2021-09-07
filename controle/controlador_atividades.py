@@ -21,9 +21,11 @@ class ControladorAtividades:
         self.__atividades.append(atividade)
 
     def lista_atividades(self):
+        dados_atividades = []
         for atividade in self.__atividades:
-            self.__tela_atividade.mostra_atividade({"titulo": atividade.titulo, "descricao": atividade.descricao,
-                                                    "prazo": atividade.prazo, "status": atividade.status})
+            dados_atividades.append({"titulo": atividade.titulo, "descricao": atividade.descricao,
+                                    "prazo": atividade.prazo, "status": atividade.status})
+        self.__tela_atividade.mostra_atividade(dados_atividades)
 
     def alterar_atividade(self):
         self.lista_atividades()
@@ -52,12 +54,14 @@ class ControladorAtividades:
             self.__tela_atividade.show_msg("Atividade não existente.")
 
     def find_atividade_by_titulo(self):
+        dado_atividade = []
         titulo_atividade = self.__tela_atividade.seleciona_atividade()
         atividade = self.pega_atividade_por_titulo(titulo_atividade)
 
         if atividade is not None:
-            self.__tela_atividade.mostra_atividade({"titulo": atividade.titulo, "descricao": atividade.descricao,
-                                                    "prazo": atividade.prazo, "status": atividade.status})
+            dado_atividade.append({"titulo": atividade.titulo, "descricao": atividade.descricao,
+                                  "prazo": atividade.prazo, "status": atividade.status})
+            self.__tela_atividade.mostra_atividade(dado_atividade)
         else:
             self.__tela_atividade.show_msg("Atividade não encontrada.")
 

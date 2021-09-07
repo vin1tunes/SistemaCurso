@@ -40,32 +40,39 @@ class ControladorDisciplinas:
             j += 1
 
     def lista_disciplina(self):
+        dados_disciplinas = []
         for i in self.__disciplinas:
-            self.__tela_disciplina.mostra_disciplina({"nome": i.nome, "qtd_max_alunos": i.qtd_max_alunos,
-                                                      "nome_professor": i.professor.nome,
-                                                      "cpf_professor": i.professor.cpf,
-                                                      "departamento_professor": i.professor.departamento})
-            print("\n")
+            dados_disciplinas.append({"nome": i.nome, "qtd_max_alunos": i.qtd_max_alunos,
+                                     "nome_professor": i.professor.nome,
+                                      "cpf_professor": i.professor.cpf,
+                                      "departamento_professor": i.professor.departamento})
+        self.__tela_disciplina.mostra_disciplina(dados_disciplinas)
+
 
     def lista_disciplina_selecionada(self):
         self.lista_disciplina()
         nome_disciplina = self.__tela_disciplina.seleciona_disciplina()
         disciplina = self.pega_disciplina_por_nome(nome_disciplina)
+        dados_disciplina = []
 
-        self.__tela_disciplina.mostra_disciplina({"nome": disciplina.nome, "qtd_max_alunos": disciplina.qtd_max_alunos,
-                                                  "nome_professor": disciplina.professor.nome,
-                                                  "cpf_professor": disciplina.professor.cpf,
-                                                  "departamento_professor": disciplina.professor.departamento})
-        print("\n")
+        dados_disciplina.append({"nome": disciplina.nome, "qtd_max_alunos": disciplina.qtd_max_alunos,
+                                "nome_professor": disciplina.professor.nome,
+                                "cpf_professor": disciplina.professor.cpf,
+                                "departamento_professor": disciplina.professor.departamento})
+        self.__tela_disciplina.mostra_disciplina(dados_disciplina)
 
+        dados_aluno = []
         for i in disciplina.alunos:
-            self.__tela_disciplina.mostra_aluno_disciplina({"nome": i.nome, "cpf": i.cpf, "matricula": i.matricula})
-            print("\n")
+            dados_aluno.append({"nome": i.nome, "cpf": i.cpf, "matricula": i.matricula})
 
+        self.__tela_disciplina.mostra_aluno_disciplina(dados_aluno)
+
+        dados_atividade = []
         for k in disciplina.atividades:
-            self.__tela_disciplina.mostra_atividade_disciplina({"titulo": k.titulo, "descricao": k.descricao,
-                                                                "prazo": k.prazo, "status": k.status})
-            print("\n")
+            dados_atividade.append({"titulo": k.titulo, "descricao": k.descricao,
+                                    "prazo": k.prazo, "status": k.status})
+
+        self.__tela_disciplina.mostra_atividade_disciplina(dados_atividade)
 
     def alterar_disciplina(self):
         self.lista_disciplina()
@@ -94,44 +101,36 @@ class ControladorDisciplinas:
     def find_subject(self):
         nome_disciplina = self.__tela_disciplina.seleciona_disciplina()
         disciplina = self.pega_disciplina_por_nome(nome_disciplina)
+        dados_disciplina = []
 
         if disciplina is None:
             self.__tela_disciplina.show_msg("Disciplina não encontrada.")
         else:
-            self.__tela_disciplina.mostra_disciplina(
-                {"nome": disciplina.nome, "qtd_max_alunos": disciplina.qtd_max_alunos,
-                 "nome_professor": disciplina.professor.nome,
-                 "cpf_professor": disciplina.professor.cpf,
-                 "departamento_professor": disciplina.professor.departamento})
-            print("\n")
-
-            for j in disciplina.alunos:
-                self.__tela_disciplina.mostra_aluno_disciplina({"nome": j.nome, "cpf": j.cpf,
-                                                                "matricula": j.matricula})
-                print('\n')
-
-            for k in disciplina.atividades:
-                self.__tela_disciplina.mostra_atividade_disciplina({"titulo": k.titulo, "descricao": k.descricao,
-                                                                    "prazo": k.prazo, "status": k.status})
+            dados_disciplina.append({"nome": disciplina.nome, "qtd_max_alunos": disciplina.qtd_max_alunos,
+                                     "nome_professor": disciplina.professor.nome,
+                                     "cpf_professor": disciplina.professor.cpf,
+                                     "departamento_professor": disciplina.professor.departamento})
+            self.__tela_disciplina.mostra_disciplina(dados_disciplina)
 
     def find_student_by_subject(self):
         self.lista_disciplina()
         nome_disciplina = self.__tela_disciplina.seleciona_disciplina()
         disciplina = self.pega_disciplina_por_nome(nome_disciplina)
 
-        matricula_aluno = self.__tela_disciplina.find_student()
+        matricula_aluno = self.__tela_disciplina.seleciona_matricula_aluno()
 
+        dados_aluno = []
         for i in disciplina.alunos:
             if i.matricula == matricula_aluno:
-                self.__tela_disciplina.mostra_aluno_disciplina({"nome": i.nome, "cpf": i.cpf,
-                                                                "matricula": i.matricula})
+                dados_aluno.append({"nome": i.nome, "cpf": i.cpf, "matricula": i.matricula})
+        self.__tela_disciplina.mostra_aluno_disciplina(dados_aluno)
 
     def excluir_aluno_disciplina(self):
         self.lista_disciplina()
         nome_disciplina = self.__tela_disciplina.seleciona_disciplina()
         disciplina = self.pega_disciplina_por_nome(nome_disciplina)
 
-        matricula_aluno = self.__tela_disciplina.matricula_excluir()
+        matricula_aluno = self.__tela_disciplina.seleciona_matricula_aluno()
         aluno = self.__controlador_sistema.controlador_alunos.pega_aluno_por_matricula(matricula_aluno)
         disciplina.alunos.remove(aluno)
 
@@ -144,4 +143,4 @@ class ControladorDisciplinas:
                         7: self.excluir_aluno_disciplina, 8: self.find_subject, 0: self.retornar}
 
         while True:
-            lista_opcoes[self.__tela_disciplina.tela_opcpes()]()
+            lista_opcoes[self.__tela_disciplina.tela_opcoes()]()

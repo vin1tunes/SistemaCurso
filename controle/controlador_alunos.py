@@ -20,8 +20,11 @@ class ControladorAlunos:
         self.__alunos.append(aluno)
 
     def lista_alunos(self):
+        dados_alunos = []
         for aluno in self.__alunos:
-            self.__tela_aluno.mostra_aluno({"nome": aluno.nome, "cpf": aluno.cpf, "matricula": aluno.matricula})
+            dados_alunos.append({"nome": aluno.nome, "cpf": aluno.cpf, "matricula": aluno.matricula})
+            # self.__tela_aluno.mostra_aluno({"nome": aluno.nome, "cpf": aluno.cpf, "matricula": aluno.matricula})
+        self.__tela_aluno.mostra_aluno(dados_alunos)
 
     def alterar_aluno(self):
         self.lista_alunos()
@@ -49,11 +52,13 @@ class ControladorAlunos:
             self.__tela_aluno.show_msg("Aluno não existente.")
 
     def find_student_by_matricula(self):
+        dado_aluno = []
         matricula_aluno = self.__tela_aluno.seleciona_aluno()
         aluno = self.pega_aluno_por_matricula(matricula_aluno)
 
         if aluno is not None:
-            self.__tela_aluno.mostra_aluno({"nome": aluno.nome, "cpf": aluno.cpf, "matricula": aluno.matricula})
+            dado_aluno.append({"nome": aluno.nome, "cpf": aluno.cpf, "matricula": aluno.matricula})
+            self.__tela_aluno.mostra_aluno(dado_aluno)
         else:
             self.__tela_aluno.show_msg("Aluno não encontrado.")
 
