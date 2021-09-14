@@ -31,7 +31,7 @@ class TelaAtividadeAluno:
         return opcao
 
     def init_opcoes(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text('******** ATIVIDADES ALUNO *******', font=("Helvica", 25))],
             [sg.Text('Escolha sua opção:', font=("Helvica", 15))],
@@ -49,7 +49,7 @@ class TelaAtividadeAluno:
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
     def pega_dados_atividade_aluno(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** DADOS ATIVIDADE ALUNO ********", font=("Helvica", 25))],
             [sg.Text("Nota:", size=(20, 1)), sg.InputText('', key='nota')],
@@ -90,7 +90,7 @@ class TelaAtividadeAluno:
         return button, values
 
     def seleciona_matricula_aluno(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONAR MATRÍCULA ALUNO ********", font=("Helvica", 25))],
             [sg.Text("Digite a matrícula do aluno que deseja selecionar:", font=("Helvica", 25))],
@@ -105,7 +105,7 @@ class TelaAtividadeAluno:
         return matricula
 
     def seleciona_atividade_titulo(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONAR TÍTULO ATIVIDADE ********", font=("Helvica", 25))],
             [sg.Text("Digite o título da atividade que deseja selecionar:", font=("Helvica", 25))],
@@ -120,7 +120,7 @@ class TelaAtividadeAluno:
         return titulo
 
     def seleciona_nome_disciplina(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONAR DISCIPLINA ********", font=("Helvica", 25))],
             [sg.Text("Digite o nome da disciplina que deseja selecionar:", font=("Helvica", 25))],

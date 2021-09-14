@@ -25,7 +25,7 @@ class TelaAluno:
         return opcao
 
     def init_opcoes(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text('******** ALUNOS *******', font=("Helvica", 25))],
             [sg.Text('Escolha sua opção:', font=("Helvica", 15))],
@@ -40,7 +40,7 @@ class TelaAluno:
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
     def pega_dados_aluno(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** DADOS ALUNO ********", font=("Helvica", 25))],
             [sg.Text("Nome:", size=(15, 1)), sg.InputText('', key='nome')],
@@ -51,12 +51,22 @@ class TelaAluno:
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
         button, values = self.open()
-        nome = values['nome']
-        cpf = values['cpf']
-        matricula = values['matricula']
 
-        self.close()
-        return {"nome": nome, "cpf": cpf, "matricula": matricula}
+        try:
+            nome = values['nome']
+            cpf = int(values['cpf'])
+            matricula = int(values['matricula'])
+            return {"nome": nome, "cpf": cpf, "matricula": matricula}
+        except ValueError as e:
+            self.show_msg(e)
+
+        #finally:
+        #    self.close()
+
+
+
+        # self.close()
+        # return {"nome": nome, "cpf": cpf, "matricula": matricula}
 
     def mostra_aluno(self, dados_aluno):
         string_todos_alunos = ''
@@ -68,19 +78,19 @@ class TelaAluno:
             sg.Popup('******** LISTA DE ALUNOS DO CURSO ********', string_todos_alunos)
 
     def seleciona_aluno(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONAR ALUNO ********", font=("Helvica", 25))],
-            [sg.Text("Digite o CPF do aluno que deseja selecionar:", font=("Helvica", 25))],
-            [sg.Text("CPF:", size=(15, 1)), sg.InputText('', key='cpf')],
+            [sg.Text("Digite a matrícula do aluno que deseja selecionar:", font=("Helvica", 25))],
+            [sg.Text("Matrícula:", size=(15, 1)), sg.InputText('', key='matricula')],
             [sg.Button("Confirmar"), sg.Cancel("Cancelar")]
         ]
         self.__window = sg.Window('Seleciona Aluno').Layout(layout)
 
         button, values = self.open()
-        cpf = values['cpf']
+        matricula = values['matricula']
         self.close()
-        return cpf
+        return matricula
 
     def show_msg(self, msg):
         sg.popup("", msg)

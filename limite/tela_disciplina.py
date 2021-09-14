@@ -31,7 +31,7 @@ class TelaDisciplina:
         return opcao
 
     def init_opcoes(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text('******** DISCIPLINAS *******', font=("Helvica", 25))],
             [sg.Text('Escolha sua opção:', font=("Helvica", 15))],
@@ -49,7 +49,7 @@ class TelaDisciplina:
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
     def pega_dados_disciplina(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** DADOS DISCIPLINA ********", font=("Helvica", 25))],
             [sg.Text("Nome da disciplina:", size=(20, 1)), sg.InputText('', key='nome')],
@@ -77,7 +77,7 @@ class TelaDisciplina:
         sg.popup("******** LISTA DE DISCIPLINAS DO CURSO ********", string_todas_disciplinas)
 
     def seleciona_cpf_professor(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONA CPF PROFESSOR ********", font=("Helvica", 25))],
             [sg.Text("Digite o CPF do professor que deseja selecionar:", font=("Helvica", 25))],
@@ -92,7 +92,7 @@ class TelaDisciplina:
         return cpf
 
     def seleciona_matricula_aluno(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONA MATRÍCULA ALUNO ********", font=("Helvica", 25))],
             [sg.Text("Digite a matrícula do aluno que deseja selecionar:", font=("Helvica", 25))],
@@ -107,7 +107,7 @@ class TelaDisciplina:
         return matricula
 
     def atividade_planejada(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** QUANTIDADE DE ATIVIDADES ********", font=("Helvica", 25))],
             [sg.Text("Quantidade de atividades planejadas para disciplina", font=("Helvica", 25))],
@@ -122,7 +122,7 @@ class TelaDisciplina:
         return qtd_atividade
 
     def seleciona_titulo_atividade(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONA ATIVIDADE ********", font=("Helvica", 25))],
             [sg.Text("Título da atividade que deseja selecionar", font=("Helvica", 25))],
@@ -137,7 +137,7 @@ class TelaDisciplina:
         return titulo_atividade
 
     def seleciona_disciplina(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONA DISCIPLINA ********", font=("Helvica", 25))],
             [sg.Text("Nome da disciplina que deseja selecionar", font=("Helvica", 25))],

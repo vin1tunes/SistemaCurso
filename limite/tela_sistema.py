@@ -28,7 +28,7 @@ class TelaSistema:
         self.__window.Close()
 
     def init_components(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******* BEM-VINDO AO CURSO DE SISTEMAS DE INFORMAÇÃO ********", font=("Helvica", 25))],
             [sg.Text("Escolha sua opção:", font=("Helvica", 15))],
@@ -40,3 +40,4 @@ class TelaSistema:
             [sg.Radio('Finalizar Sistema', "RD1", key='0')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
+        self.__window = sg.Window('Sistema Cursos').Layout(layout)

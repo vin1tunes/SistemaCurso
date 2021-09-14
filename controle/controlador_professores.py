@@ -1,15 +1,18 @@
 from limite.tela_professor import TelaProfessor
 from entidade.professor import Professor
+# from DAOs.professor_dao import ProfessorDAO
 
 
 class ControladorProfessores:
     def __init__(self, controlador_sistema):
         self.__professores = []
+        # self.__professor_DAO = ProfessorDAO()
         self.__tela_professor = TelaProfessor()
         self.__controlador_sistema = controlador_sistema
 
     def pega_professor_por_cpf(self, cpf: int):
         for professor in self.__professores:
+        # for professor in self.__professor_DAO.get_all():
             if professor.cpf == cpf:
                 return professor
         return None
@@ -18,10 +21,12 @@ class ControladorProfessores:
         dados_professor = self.__tela_professor.pega_dados_professor()
         professor = Professor(dados_professor["nome"], dados_professor["cpf"], dados_professor["departamento"])
         self.__professores.append(professor)
+        # self.__professor_DAO.add(professor)
 
     def lista_professores(self):
         dados_professores = []
         for professor in self.__professores:
+        # for professor in self.__professor_DAO.get_all():
             dados_professores.append({"nome": professor.nome, "cpf": professor.cpf, "departamento": professor.departamento})
 
         self.__tela_professor.mostra_professor(dados_professores)
@@ -36,6 +41,7 @@ class ControladorProfessores:
             professor.nome = novos_dados_professor["nome"]
             professor.cpf = novos_dados_professor["cpf"]
             professor.departamento = novos_dados_professor["departamento"]
+            # self.__professor_DAO.update(professor)
             self.lista_professores()
         else:
             self.__tela_professor.show_msg("Professor não existente.")
@@ -47,6 +53,7 @@ class ControladorProfessores:
 
         if professor is not None:
             self.__professores.remove(professor)
+            # self.__professor_DAO.remove(professor.cpf)
             self.lista_professores()
         else:
             self.__tela_professor.show_msg("Professor não existente.")

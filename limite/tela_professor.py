@@ -68,7 +68,7 @@ class TelaProfessor:
             sg.Popup('******** LISTA DE PROFESSORES DO CURSO ********', string_todos_professores)
 
     def seleciona_professor(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONAR PROFESSOR ********", font=("Helvica", 25))],
             [sg.Text("Digite o CPF do professor que deseja selecionar:", font=("Helvica", 25))],

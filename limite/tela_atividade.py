@@ -25,7 +25,7 @@ class TelaAtividade:
         return opcao
 
     def init_opcoes(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text('******** ATIVIDADES *******', font=("Helvica", 25))],
             [sg.Text('Escolha sua opção:', font=("Helvica", 15))],
@@ -40,7 +40,7 @@ class TelaAtividade:
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
     def pega_dados_atividade(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** DADOS ATIVIDADE ********", font=("Helvica", 25))],
             [sg.Text("Título:", size=(15, 1)), sg.InputText('', key='titulo')],
@@ -71,7 +71,7 @@ class TelaAtividade:
             sg.Popup('******** LISTA DE ATIVIDADES DO CURSO ********', string_todos_atividades)
 
     def seleciona_atividade(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONAR ATIVIDADE ********", font=("Helvica", 25))],
             [sg.Text("Digite o título da atividade que deseja selecionar:", font=("Helvica", 25))],
