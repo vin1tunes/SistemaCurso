@@ -58,27 +58,31 @@ class TelaAtividadeAluno:
         ]
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
-        button, values = self.open()
-        nota = values['nota']
-        data_entrega = values['data_entrega']
-
-        self.close()
-        return {"nota": nota, "data_entrega": data_entrega}
+        try:
+            button, values = self.open()
+            nota = int(values['nota'])
+            data_entrega = values['data_entrega']
+        except ValueError:
+            self.show_msg("ATENÇÃO: Digite um valor inteiro para nota.")
+        else:
+            return {"nota": nota, "data_entrega": data_entrega}
+        finally:
+            self.close()
 
     def mostra_atividade_aluno(self, dados_atividade):
         string_todas_atividades_aluno = ''
         for dado in dados_atividade:
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Nota do aluno: " + dado["nota"] + '\n'
-            string_todas_atividades_aluno = string_todas_atividades_aluno + "Data da entrega: " + str(dado["data_entrega"]) + '\n'
+            string_todas_atividades_aluno = string_todas_atividades_aluno + "Data da entrega: " + dado["data_entrega"] + '\n'
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Título da atividade: " + dado["titulo_atividade"] + '\n'
-            string_todas_atividades_aluno = string_todas_atividades_aluno + "Descrição da atividade: " + str(dado["descricao_atividade"]) + '\n'
-            string_todas_atividades_aluno = string_todas_atividades_aluno + "Prazo da atividade: " + str(dado["prazo"]) + '\n'
-            string_todas_atividades_aluno = string_todas_atividades_aluno + "Status da atividade: " + str(dado["status"]) + '\n'
-            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nome do aluno: " + str(dado["nome_aluno"]) + '\n'
+            string_todas_atividades_aluno = string_todas_atividades_aluno + "Descrição da atividade: " + dado["descricao_atividade"] + '\n'
+            string_todas_atividades_aluno = string_todas_atividades_aluno + "Prazo da atividade: " + dado["prazo"] + '\n'
+            string_todas_atividades_aluno = string_todas_atividades_aluno + "Status da atividade: " + dado["status"] + '\n'
+            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nome do aluno: " + dado["nome_aluno"] + '\n'
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Cpf do aluno: " + str(dado["cpf_aluno"]) + '\n'
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Matrícula do aluno: " + str(dado["matricula_aluno"]) + '\n'
-            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nome da disciplina: " + str(dado["nome_disciplina"]) + '\n'
-            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nome do professor: " + str(dado["nome_professor"]) + '\n'
+            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nome da disciplina: " + dado["nome_disciplina"] + '\n'
+            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nome do professor: " + dado["nome_professor"] + '\n'
 
             sg.Popup('******** LISTA DE TODAS ATIVIDADES DOS ALUNOS ********', string_todas_atividades_aluno)
 
@@ -98,11 +102,16 @@ class TelaAtividadeAluno:
             [sg.Button("Confirmar"), sg.Cancel("Cancelar")]
         ]
         self.__window = sg.Window('Seleciona Aluno').Layout(layout)
-
         button, values = self.open()
-        matricula = values['matricula']
-        self.close()
-        return matricula
+
+        try:
+            matricula = int(values['matricula'])
+        except ValueError:
+            self.show_msg("ATENÇÃO: Digite um valor inteiro para matrícula")
+        else:
+            return matricula
+        finally:
+            self.close()
 
     def seleciona_atividade_titulo(self):
         sg.ChangeLookAndFeel('Dark Brown')

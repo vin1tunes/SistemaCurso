@@ -25,7 +25,7 @@ class TelaProfessor:
         return opcao
 
     def init_opcoes(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text('******** PROFESSORES *******', font=("Helvica", 25))],
             [sg.Text('Escolha sua opção:', font=("Helvica", 15))],
@@ -40,7 +40,7 @@ class TelaProfessor:
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
     def pega_dados_professor(self):
-        sg.ChangeLookAndFeel('DarkTeal4')
+        sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** DADOS PROFESSOR ********", font=("Helvica", 25))],
             [sg.Text("Nome:", size=(15, 1)), sg.InputText('', key='nome')],
@@ -50,13 +50,17 @@ class TelaProfessor:
         ]
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
-        button, values = self.open()
-        nome = values['nome']
-        cpf = values['cpf']
-        departamento = values['departamento']
-
-        self.close()
-        return {"nome": nome, "cpf": cpf, "departamento": departamento}
+        try:
+            button, values = self.open()
+            nome = values['nome']
+            cpf = int(values['cpf'])
+            departamento = values['departamento']
+        except ValueError:
+            self.show_msg("ATENÇÃO: digite um valor inteiro para cpf.")
+        else:
+            return {"nome": nome, "cpf": cpf, "departamento": departamento}
+        finally:
+            self.close()
 
     def mostra_professor(self, dados_professor):
         string_todos_professores = ''
@@ -78,9 +82,15 @@ class TelaProfessor:
         self.__window = sg.Window('Seleciona Professor').Layout(layout)
 
         button, values = self.open()
-        cpf = values['cpf']
-        self.close()
-        return cpf
+
+        try:
+            cpf = int(values['cpf'])
+        except ValueError:
+            self.show_msg("ATENÇÃO: Digite um valor inteiro para cpf.")
+        else:
+            return cpf
+        finally:
+            self.close()
 
     def show_msg(self, msg):
         sg.popup("", msg)

@@ -35,10 +35,10 @@ class TelaDisciplina:
         layout = [
             [sg.Text('******** DISCIPLINAS *******', font=("Helvica", 25))],
             [sg.Text('Escolha sua opção:', font=("Helvica", 15))],
-            [sg.Radio('Incluir Disciplina', "RD1", key='1')],
-            [sg.Radio('Excluir Disciplina', "RD1", key='2')],
-            [sg.Radio('Alterar Disciplina', "RD1", key='3')],
-            [sg.Radio('Listar todas Disciplinas', "RD1", key='4')],
+            [sg.Radio('Incluir disciplina', "RD1", key='1')],
+            [sg.Radio('Excluir disciplina', "RD1", key='2')],
+            [sg.Radio('Alterar disciplina', "RD1", key='3')],
+            [sg.Radio('Listar todas disciplinas', "RD1", key='4')],
             [sg.Radio('Listar uma disciplina', "RD1", key='5')],
             [sg.Radio('Buscar por um aluno em uma disciplina', "RD1", key='6')],
             [sg.Radio('Excluir aluno de uma disciplina', "RD1", key='7')],
@@ -58,20 +58,24 @@ class TelaDisciplina:
         ]
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
-        button, values = self.open()
-        nome = values['nome']
-        qtd_max_alunos = values['qtd_max_alunos']
-
-        self.close()
-        return {"nome": nome, "qtd_max_alunos": qtd_max_alunos}
+        try:
+            button, values = self.open()
+            nome = values['nome']
+            qtd_max_alunos = int(values['qtd_max_alunos'])
+        except ValueError:
+            self.show_msg("ATENÇÃO: Digite um valor inteiro para a quantidade de alunos.")
+        else:
+            return {"nome": nome, "qtd_max_alunos": qtd_max_alunos}
+        finally:
+            self.close()
 
     def mostra_disciplina(self, dados_disciplina):
         string_todas_disciplinas = ''
         for dado in dados_disciplina:
             string_todas_disciplinas = string_todas_disciplinas + "Nome da disciplina: " + dado["nome"] + '\n'
-            string_todas_disciplinas = string_todas_disciplinas + "Quantidade máxima de alunos: " + dado["qtd_max_alunos"] + '\n'
+            string_todas_disciplinas = string_todas_disciplinas + "Quantidade máxima de alunos: " + str(dado["qtd_max_alunos"]) + '\n'
             string_todas_disciplinas = string_todas_disciplinas + "Nome do professor: " + dado["nome_professor"] + '\n'
-            string_todas_disciplinas = string_todas_disciplinas + "CPF do professor: " + dado["cpf_professor"] + '\n'
+            string_todas_disciplinas = string_todas_disciplinas + "CPF do professor: " + str(dado["cpf_professor"]) + '\n'
             string_todas_disciplinas = string_todas_disciplinas + "Departamento do professor: " + dado["departamento_professor"] + '\n\n'
 
         sg.popup("******** LISTA DE DISCIPLINAS DO CURSO ********", string_todas_disciplinas)
@@ -87,9 +91,15 @@ class TelaDisciplina:
         self.__window = sg.Window('Seleciona Professor').Layout(layout)
 
         button, values = self.open()
-        cpf = values['cpf']
-        self.close()
-        return cpf
+
+        try:
+            cpf = int(values['cpf'])
+        except ValueError:
+            self.show_msg("ATENÇÃO: Digite um valor inteiro para cpf.")
+        else:
+            return cpf
+        finally:
+            self.close()
 
     def seleciona_matricula_aluno(self):
         sg.ChangeLookAndFeel('Dark Brown')
@@ -102,9 +112,15 @@ class TelaDisciplina:
         self.__window = sg.Window('Seleciona Aluno').Layout(layout)
 
         button, values = self.open()
-        matricula = values['matricula']
-        self.close()
-        return matricula
+
+        try:
+            matricula = int(values['matricula'])
+        except ValueError:
+            self.show_msg("ATENÇÃO: Digite um valor inteiro para matrícula.")
+        else:
+            return matricula
+        finally:
+            self.close()
 
     def atividade_planejada(self):
         sg.ChangeLookAndFeel('Dark Brown')
@@ -164,9 +180,9 @@ class TelaDisciplina:
         string_todos_atividades = ''
         for dado in dados_atividade:
             string_todos_atividades = string_todos_atividades + "Título da atividade: " + dado["titulo"] + '\n'
-            string_todos_atividades = string_todos_atividades + "Descrição da atividade: " + str(dado["descricao"]) + '\n'
-            string_todos_atividades = string_todos_atividades + "Prazo da atividade: " + str(dado["prazo"]) + '\n'
-            string_todos_atividades = string_todos_atividades + "Status da atividade: " + str(dado["status"]) + '\n\n'
+            string_todos_atividades = string_todos_atividades + "Descrição da atividade: " + dado["descricao"] + '\n'
+            string_todos_atividades = string_todos_atividades + "Prazo da atividade: " + dado["prazo"] + '\n'
+            string_todos_atividades = string_todos_atividades + "Status da atividade: " + dado["status"] + '\n\n'
 
             sg.Popup('******** LISTA DE ATIVIDADES DA DISCIPLINA ********', string_todos_atividades)
 

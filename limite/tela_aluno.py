@@ -29,11 +29,11 @@ class TelaAluno:
         layout = [
             [sg.Text('******** ALUNOS *******', font=("Helvica", 25))],
             [sg.Text('Escolha sua opção:', font=("Helvica", 15))],
-            [sg.Radio('Incluir Aluno', "RD1", key='1')],
-            [sg.Radio('Alterar Aluno', "RD1", key='2')],
-            [sg.Radio('Listar Alunos', "RD1", key='3')],
-            [sg.Radio('Excluir Aluno', "RD1", key='4')],
-            [sg.Radio('Buscar Aluno', "RD1", key='5')],
+            [sg.Radio('Incluir aluno', "RD1", key='1')],
+            [sg.Radio('Alterar aluno', "RD1", key='2')],
+            [sg.Radio('Listar alunos', "RD1", key='3')],
+            [sg.Radio('Excluir aluno', "RD1", key='4')],
+            [sg.Radio('Buscar aluno', "RD1", key='5')],
             [sg.Radio('Retornar', "RD1", key='0')],
             [sg.Button('Confirmar'), sg.Cancel("Cancelar")]
         ]
@@ -50,23 +50,17 @@ class TelaAluno:
         ]
         self.__window = sg.Window('Sistema Curso').Layout(layout)
 
-        button, values = self.open()
-
         try:
+            button, values = self.open()
             nome = values['nome']
             cpf = int(values['cpf'])
             matricula = int(values['matricula'])
+        except ValueError:
+            self.show_msg("ATENÇÃO: Digite um valor inteiro para cpf ou matrícula.")
+        else:
             return {"nome": nome, "cpf": cpf, "matricula": matricula}
-        except ValueError as e:
-            self.show_msg(e)
-
-        #finally:
-        #    self.close()
-
-
-
-        # self.close()
-        # return {"nome": nome, "cpf": cpf, "matricula": matricula}
+        finally:
+            self.close()
 
     def mostra_aluno(self, dados_aluno):
         string_todos_alunos = ''
@@ -81,16 +75,22 @@ class TelaAluno:
         sg.ChangeLookAndFeel('Dark Brown')
         layout = [
             [sg.Text("******** SELECIONAR ALUNO ********", font=("Helvica", 25))],
-            [sg.Text("Digite a matrícula do aluno que deseja selecionar:", font=("Helvica", 25))],
-            [sg.Text("Matrícula:", size=(15, 1)), sg.InputText('', key='matricula')],
+            [sg.Text("Digite o cpf do aluno que deseja selecionar:", font=("Helvica", 25))],
+            [sg.Text("Cpf:", size=(15, 1)), sg.InputText('', key='cpf')],
             [sg.Button("Confirmar"), sg.Cancel("Cancelar")]
         ]
         self.__window = sg.Window('Seleciona Aluno').Layout(layout)
 
         button, values = self.open()
-        matricula = values['matricula']
-        self.close()
-        return matricula
+
+        try:
+            cpf = int(values['cpf'])
+        except ValueError:
+            self.show_msg("ATENÇÃO: Digite um valor inteiro para cpf.")
+        else:
+            return cpf
+        finally:
+            self.close()
 
     def show_msg(self, msg):
         sg.popup("", msg)

@@ -64,9 +64,9 @@ class TelaAtividade:
         string_todos_atividades = ''
         for dado in dados_atividade:
             string_todos_atividades = string_todos_atividades + "Título da atividade: " + dado["titulo"] + '\n'
-            string_todos_atividades = string_todos_atividades + "Descrição da atividade: " + str(dado["descricao"]) + '\n'
-            string_todos_atividades = string_todos_atividades + "Prazo da atividade: " + str(dado["prazo"]) + '\n'
-            string_todos_atividades = string_todos_atividades + "Status da atividade: " + str(dado["status"]) + '\n\n'
+            string_todos_atividades = string_todos_atividades + "Descrição da atividade: " + dado["descricao"] + '\n'
+            string_todos_atividades = string_todos_atividades + "Prazo da atividade: " + dado["prazo"] + '\n'
+            string_todos_atividades = string_todos_atividades + "Status da atividade: " + dado["status"] + '\n\n'
 
             sg.Popup('******** LISTA DE ATIVIDADES DO CURSO ********', string_todos_atividades)
 
