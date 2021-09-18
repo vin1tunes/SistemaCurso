@@ -4,7 +4,7 @@ class Atividade:
     atributos: título, descrição, prazo, status.
     """
 
-    def __init__(self, titulo: str, descricao: str, prazo: int, status: str):
+    def __init__(self, titulo: str, descricao: str, prazo: str, status: str):
         self.__titulo = titulo
         self.__descricao = descricao
         self.__prazo = prazo
