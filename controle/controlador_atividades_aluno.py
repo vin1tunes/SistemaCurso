@@ -1,15 +1,16 @@
 from limite.tela_atividade_aluno import TelaAtividadeAluno
 from entidade.atividade_aluno import AtividadeAluno
+from DAOs.atividade_aluno_dao import AtividadeAlunoDAO
 
 
 class ControladorAtividadesAluno:
     def __init__(self, controlador_sistema):
-        self.__atividades_aluno = []
+        self.__atividade_aluno_DAO = AtividadeAlunoDAO()
         self.__tela_atividade_aluno = TelaAtividadeAluno()
         self.__controlar_sistema = controlador_sistema
 
     def pega_atividade_por_matricula(self, matricula: int):
-        for atividade_aluno in self.__atividades_aluno:
+        for atividade_aluno in self.__atividade_aluno_DAO.get_all():
             if atividade_aluno.aluno.matricula == matricula:
                 return atividade_aluno
         return None
@@ -31,11 +32,11 @@ class ControladorAtividadesAluno:
 
         atividade_aluno = AtividadeAluno(dados_atividade_aluno["nota"], dados_atividade_aluno["data_entrega"],
                                          atividade, aluno, disciplina)
-        self.__atividades_aluno.append(atividade_aluno)
+        self.__atividade_aluno_DAO.add(atividade_aluno)
 
     def lista_atividade_aluno(self):
         dados_atividades = []
-        for i in self.__atividades_aluno:
+        for i in self.__atividade_aluno_DAO.get_all():
             dados_atividades.append({"nota": i.nota, "data_entrega": i.data_entrega,
                                     "titulo_atividade": i.atividade.titulo,
                                     "descricao_atividade": i.atividade.descricao,
@@ -54,7 +55,7 @@ class ControladorAtividadesAluno:
         matricula_aluno = self.__tela_atividade_aluno.seleciona_matricula_aluno()
         dados_atividades = []
 
-        for i in self.__atividades_aluno:
+        for i in self.__atividade_aluno_DAO.get_all():
             if i.aluno.matricula == matricula_aluno:
                 dados_atividades.append({"nota": i.nota, "data_entrega": i.data_entrega,
                                         "titulo_atividade": i.atividade.titulo,
@@ -74,7 +75,7 @@ class ControladorAtividadesAluno:
         nome_disciplina = self.__tela_atividade_aluno.seleciona_nome_disciplina()
         dados_atividades = []
 
-        for i in self.__atividades_aluno:
+        for i in self.__atividade_aluno_DAO.get_all():
             if i.aluno.matricula == matricula_aluno and i.disciplina.nome == nome_disciplina:
                 dados_atividades.append({"nota": i.nota, "data_entrega": i.data_entrega,
                                         "titulo_atividade": i.atividade.titulo,
@@ -96,7 +97,7 @@ class ControladorAtividadesAluno:
         soma_das_notas = 0
         counter = 0
 
-        for i in self.__atividades_aluno:
+        for i in self.__atividade_aluno_DAO.get_all():
             if i.aluno.matricula == matricula_aluno and i.disciplina.nome == nome_disciplina:
                 soma_das_notas += int(i.nota)
                 counter += 1
@@ -112,6 +113,7 @@ class ControladorAtividadesAluno:
             novos_dados_atividade_aluno = self.__tela_atividade_aluno.pega_dados_atividade_aluno()
             atividade_aluno.nota = novos_dados_atividade_aluno["nota"]
             atividade_aluno.data_entrega = novos_dados_atividade_aluno["data_entrega"]
+            self.__atividade_aluno_DAO.update(atividade_aluno)
             self.lista_atividade_aluno()
         else:
             self.__tela_atividade_aluno.show_msg("Atividade do aluno não encontrada.")
@@ -122,7 +124,7 @@ class ControladorAtividadesAluno:
         atividade_aluno = self.pega_atividade_por_matricula(matricula_aluno)
 
         if atividade_aluno is not None:
-            self.__atividades_aluno.remove(atividade_aluno)
+            self.__atividade_aluno_DAO.remove(atividade_aluno.aluno.matricula)
             self.lista_atividade_aluno()
         else:
             self.__tela_atividade_aluno.show_msg("Atividade não encontrada.")
@@ -132,7 +134,7 @@ class ControladorAtividadesAluno:
         titulo_atividade = self.__tela_atividade_aluno.seleciona_atividade_titulo()
         dados_atividade = []
 
-        for i in self.__atividades_aluno:
+        for i in self.__atividade_aluno_DAO.get_all():
             if i.atividade.titulo == titulo_atividade and i.aluno.matricula == matricula_aluno:
                 dados_atividade.append({"nota": i.nota, "data_entrega": i.data_entrega,
                                         "titulo_atividade": i.atividade.titulo,

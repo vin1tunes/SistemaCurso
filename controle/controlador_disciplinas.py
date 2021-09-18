@@ -1,26 +1,34 @@
 from limite.tela_disciplina import TelaDisciplina
 from entidade.disciplina import Disciplina
+from DAOs.disciplina_dao import DisciplinaDAO
+from Exceptions.disciplinaJaExistenteException import DisciplinaJaExistenteException
 
 
 class ControladorDisciplinas:
     def __init__(self, controlador_sistema):
-        self.__disciplinas = []
+        self.__disciplina_DAO = DisciplinaDAO()
         self.__tela_disciplina = TelaDisciplina()
         self.__controlador_sistema = controlador_sistema
 
     def pega_disciplina_por_nome(self, nome: str):
-        for disciplina in self.__disciplinas:
+        for disciplina in self.__disciplina_DAO.get_all():
             if disciplina.nome == nome:
                 return disciplina
         return None
 
     def incluir_disciplina(self):
         dados_disciplina = self.__tela_disciplina.pega_dados_disciplina()
-        self.__controlador_sistema.controlador_professores.lista_professores()
-        cpf_professor = self.__tela_disciplina.seleciona_cpf_professor()
-        professor = self.__controlador_sistema.controlador_professores.pega_professor_por_cpf(cpf_professor)
-        disciplina = Disciplina(dados_disciplina["nome"], dados_disciplina["qtd_max_alunos"], professor)
-        self.__disciplinas.append(disciplina)
+        if dados_disciplina is not None:
+            try:
+                if self.pega_disciplina_por_nome(dados_disciplina["nome"]) is not None:
+                    raise DisciplinaJaExistenteException
+            except DisciplinaJaExistenteException as e:
+                self.__tela_disciplina.show_msg(e)
+            else:
+                self.__controlador_sistema.controlador_professores.lista_professores()
+                cpf_professor = self.__tela_disciplina.seleciona_cpf_professor()
+                professor = self.__controlador_sistema.controlador_professores.pega_professor_por_cpf(cpf_professor)
+                disciplina = Disciplina(dados_disciplina["nome"], dados_disciplina["qtd_max_alunos"], professor)
 
         i = 1
         while i <= int(disciplina.qtd_max_alunos):
@@ -39,15 +47,16 @@ class ControladorDisciplinas:
             disciplina.inclui_atividade_disciplina(atividade)
             j += 1
 
+        self.__disciplina_DAO.add(disciplina)
+
     def lista_disciplina(self):
         dados_disciplinas = []
-        for i in self.__disciplinas:
+        for i in self.__disciplina_DAO.get_all():
             dados_disciplinas.append({"nome": i.nome, "qtd_max_alunos": i.qtd_max_alunos,
                                      "nome_professor": i.professor.nome,
                                       "cpf_professor": i.professor.cpf,
                                       "departamento_professor": i.professor.departamento})
         self.__tela_disciplina.mostra_disciplina(dados_disciplinas)
-
 
     def lista_disciplina_selecionada(self):
         self.lista_disciplina()
@@ -83,6 +92,7 @@ class ControladorDisciplinas:
             novos_dados_disciplina = self.__tela_disciplina.pega_dados_disciplina()
             disciplina.nome = novos_dados_disciplina["nome"]
             disciplina.qtd_max_alunos = novos_dados_disciplina["qtd_max_alunos"]
+            self.__disciplina_DAO.update(disciplina)
             self.lista_disciplina()
         else:
             self.__tela_disciplina.show_msg("Disciplina não existente.")
@@ -93,7 +103,7 @@ class ControladorDisciplinas:
         disciplina = self.pega_disciplina_por_nome(nome_disciplina)
 
         if disciplina is not None:
-            self.__disciplinas.remove(disciplina)
+            self.__disciplina_DAO.remove(disciplina.nome)
             self.lista_disciplina()
         else:
             self.__tela_disciplina.show_msg("Disciplina não existente.")
