@@ -27,6 +27,7 @@ class ControladorAtividades:
             atividade = Atividade(dados_atividade["titulo"], dados_atividade["descricao"],
                                   dados_atividade["prazo"], dados_atividade["status"])
             self.__atividade_DAO.add(atividade)
+            self.__tela_atividade.show_msg("Atividade cadastrada com sucesso!")
 
     def lista_atividades(self):
         dados_atividades = []
@@ -59,6 +60,7 @@ class ControladorAtividades:
         if atividade is not None:
             self.__atividade_DAO.remove(atividade.titulo)
             self.lista_atividades()
+            self.__tela_atividade.show_msg("Atividade removida com sucesso!")
         else:
             self.__tela_atividade.show_msg("ATENÇÃO: Atividade não existente.")
 

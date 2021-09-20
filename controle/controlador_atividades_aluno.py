@@ -33,6 +33,7 @@ class ControladorAtividadesAluno:
         atividade_aluno = AtividadeAluno(dados_atividade_aluno["nota"], dados_atividade_aluno["data_entrega"],
                                          atividade, aluno, disciplina)
         self.__atividade_aluno_DAO.add(atividade_aluno)
+        self.__tela_atividade_aluno.show_msg("Atividade do aluno cadastrada com sucesso!")
 
     def lista_atividade_aluno(self):
         dados_atividades = []
@@ -125,6 +126,7 @@ class ControladorAtividadesAluno:
 
         if atividade_aluno is not None:
             self.__atividade_aluno_DAO.remove(atividade_aluno.aluno.matricula)
+            self.__tela_atividade_aluno.show_msg("Atividade removida com sucesso!")
             self.lista_atividade_aluno()
         else:
             self.__tela_atividade_aluno.show_msg("Atividade não encontrada.")

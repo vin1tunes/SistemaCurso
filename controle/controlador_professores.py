@@ -27,6 +27,7 @@ class ControladorProfessores:
             else:
                 professor = Professor(dados_professor["nome"], dados_professor["cpf"], dados_professor["departamento"])
                 self.__professor_DAO.add(professor)
+                self.__tela_professor.show_msg("Professor cadastrado com sucesso!")
 
     def lista_professores(self):
         dados_professores = []
@@ -57,6 +58,7 @@ class ControladorProfessores:
 
         if professor is not None:
             self.__professor_DAO.remove(professor.cpf)
+            self.__tela_professor.show_msg("Professor removido com sucesso!")
             self.lista_professores()
         else:
             self.__tela_professor.show_msg("ATENÇÃO: Professor não existente.")

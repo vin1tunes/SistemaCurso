@@ -48,6 +48,7 @@ class ControladorDisciplinas:
             j += 1
 
         self.__disciplina_DAO.add(disciplina)
+        self.__tela_disciplina.show_msg("Disciplina cadastrada com sucesso!")
 
     def lista_disciplina(self):
         dados_disciplinas = []
@@ -104,6 +105,7 @@ class ControladorDisciplinas:
 
         if disciplina is not None:
             self.__disciplina_DAO.remove(disciplina.nome)
+            self.__tela_disciplina.show_msg("Disciplina removida com sucesso!")
             self.lista_disciplina()
         else:
             self.__tela_disciplina.show_msg("Disciplina não existente.")
@@ -143,6 +145,7 @@ class ControladorDisciplinas:
         matricula_aluno = self.__tela_disciplina.seleciona_matricula_aluno()
         aluno = self.__controlador_sistema.controlador_alunos.pega_aluno_por_matricula(matricula_aluno)
         disciplina.alunos.remove(aluno)
+        self.__tela_disciplina.show_msg("Aluno removido com sucesso!")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()

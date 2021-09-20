@@ -33,7 +33,7 @@ class ControladorAlunos:
             else:
                 aluno = Aluno(dados_aluno["nome"], (dados_aluno["cpf"]), dados_aluno["matricula"])
                 self.__aluno_DAO.add(aluno)
-                self.__tela_aluno.show_msg("Aluno cadastrado com sucesso.")
+                self.__tela_aluno.show_msg("Aluno cadastrado com sucesso!")
 
     def lista_alunos(self):
         dados_alunos = []
@@ -63,6 +63,7 @@ class ControladorAlunos:
 
         if aluno is not None:
             self.__aluno_DAO.remove(aluno.cpf)
+            self.__tela_aluno.show_msg("Aluno removido com sucesso!")
             self.lista_alunos()
         else:
             self.__tela_aluno.show_msg("ATENÇÃO: Aluno não existente.")

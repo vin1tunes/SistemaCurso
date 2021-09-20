@@ -72,7 +72,7 @@ class TelaAtividadeAluno:
     def mostra_atividade_aluno(self, dados_atividade):
         string_todas_atividades_aluno = ''
         for dado in dados_atividade:
-            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nota do aluno: " + dado["nota"] + '\n'
+            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nota do aluno: " + str(dado["nota"]) + '\n'
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Data da entrega: " + dado["data_entrega"] + '\n'
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Título da atividade: " + dado["titulo_atividade"] + '\n'
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Descrição da atividade: " + dado["descricao_atividade"] + '\n'
@@ -82,7 +82,7 @@ class TelaAtividadeAluno:
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Cpf do aluno: " + str(dado["cpf_aluno"]) + '\n'
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Matrícula do aluno: " + str(dado["matricula_aluno"]) + '\n'
             string_todas_atividades_aluno = string_todas_atividades_aluno + "Nome da disciplina: " + dado["nome_disciplina"] + '\n'
-            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nome do professor: " + dado["nome_professor"] + '\n'
+            string_todas_atividades_aluno = string_todas_atividades_aluno + "Nome do professor: " + dado["nome_professor"] + '\n\n\n'
 
             sg.Popup('******** LISTA DE TODAS ATIVIDADES DOS ALUNOS ********', string_todas_atividades_aluno)
 
